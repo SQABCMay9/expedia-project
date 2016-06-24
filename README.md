@@ -1,4 +1,4 @@
-*Basic Automation Project Structure*
+*Expedia Automation Project*
 
 **Java 7**
 
