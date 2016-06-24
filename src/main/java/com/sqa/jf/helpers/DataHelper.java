@@ -91,6 +91,10 @@ public class DataHelper {
 	}
 
 	public static Object[][] getExcelFileData(String fileLocation, String fileName, Boolean hasLabels) {
+		return getExcelFileData(fileLocation, fileName, hasLabels, 0);
+	}
+
+	public static Object[][] getExcelFileData(String fileLocation, String fileName, Boolean hasLabels, int sheetIndex) {
 		// Object[][] data = { { "Square", 36, 6, 0 }, { "Rectangle", 12, 4, 3 }
 		// };
 		ArrayList<Object> results = new ArrayList<Object>();
@@ -116,7 +120,7 @@ public class DataHelper {
 			XSSFWorkbook workbook = new XSSFWorkbook(newExcelFormatFile);
 
 			// Get first sheet from the workbook, HSSF for old format
-			XSSFSheet sheet = workbook.getSheetAt(0);
+			XSSFSheet sheet = workbook.getSheetAt(sheetIndex);
 
 			// Iterate through each rows from first sheet
 			Iterator<Row> rowIterator = sheet.iterator();
@@ -144,8 +148,8 @@ public class DataHelper {
 						rowData.add(cell.getBooleanCellValue());
 						break;
 					case Cell.CELL_TYPE_NUMERIC:
-						System.out.print((int) cell.getNumericCellValue() + "\t\t\t");
-						rowData.add((int) cell.getNumericCellValue());
+						System.out.print(cell.getNumericCellValue() + "\t\t\t");
+						rowData.add(cell.getNumericCellValue());
 						break;
 					case Cell.CELL_TYPE_STRING:
 						System.out.print(cell.getStringCellValue() + "\t\t\t");

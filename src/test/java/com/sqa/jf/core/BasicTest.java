@@ -1,6 +1,5 @@
 package com.sqa.jf.core;
 
-
 import java.util.concurrent.*;
 
 import org.openqa.selenium.*;
@@ -31,14 +30,12 @@ public class BasicTest {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(baseURL);
 	}
 
 	@BeforeClass(enabled = true)
 	public static void setupFirefox() {
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(baseURL);
 	}
 
 	@BeforeClass(enabled = false)
@@ -46,12 +43,11 @@ public class BasicTest {
 		System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
 		driver = new MarionetteDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(baseURL);
 	}
 
 	@AfterClass
 	public static void tearDown() {
-		driver.quit();
+		// driver.quit();
 	}
 
 	/**
@@ -66,6 +62,8 @@ public class BasicTest {
 	public void setupTest() {
 		// Delete all saved cookies
 		getDriver().manage().deleteAllCookies();
+		// Maximize Window
+		getDriver().manage().window().maximize();
 		// Go to base URL
 		getDriver().get(getBaseURL());
 
